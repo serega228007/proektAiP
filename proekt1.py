@@ -231,8 +231,8 @@ def sc(screen, scr, x, y):
     """
     Displays the score on the screen.
 
-    Displays the score on the screen at the specified coordinates.
-
+    :param screen: The Pygame display surface.
+    :type screen: pygame.Surface
     :param int scr: The score to be displayed.
     :param int x: The x-coordinate of the score display.
     :param int y: The y-coordinate of the score display.
