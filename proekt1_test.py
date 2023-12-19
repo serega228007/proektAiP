@@ -37,10 +37,8 @@ def test_sc():
     x, y = 100, 200
     sc(screen, scores, x, y)
     rect_four = pygame.Rect(x, y, 20, 20)
-    image_four = pygame.Surface((20, 20))
 
     rect_two = pygame.Rect(x + 20, y, 20, 20)
-    image_two = pygame.Surface((20, 20))
 
     assert screen.get_rect().contains(rect_four)
     assert screen.get_rect().contains(rect_two)
