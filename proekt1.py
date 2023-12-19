@@ -73,6 +73,12 @@ bird_skins = [
 ]
 current_skin = 0
 
+"""
+Class: Bird
+------------
+Represents the bird in the game. Handles bird animation and movement.
+"""
+
 
 class Bird(pygame.sprite.Sprite):
     def __init__(self, x, y):
@@ -149,6 +155,13 @@ def change_bird():
     flappy.image = flappy.images[flappy.index]
 
 
+"""
+Class: Pipe
+------------
+Represents a pipe obstacle in the game.
+"""
+
+
 class Pipe(pygame.sprite.Sprite):
     def __init__(self, x, y, position):
         """
@@ -174,6 +187,13 @@ class Pipe(pygame.sprite.Sprite):
         self.rect.x -= scroll_speed
         if self.rect.right < 0:
             self.kill()
+
+
+"""
+Class: Button
+--------------
+Represents a clickable button in the game.
+"""
 
 
 class Button():
