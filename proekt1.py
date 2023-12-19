@@ -82,6 +82,9 @@ class Bird(pygame.sprite.Sprite):
         :param int x: The initial x-coordinate of the bird.
         :param int y: The initial y-coordinate of the bird.
         """
+
+        if x < 0 or y < 0:
+            raise ValueError("x and y must be non-negative")
         pygame.sprite.Sprite.__init__(self)
         self.images = bird_skins[current_skin]
         self.index = 0
@@ -204,7 +207,7 @@ class Button():
         return action
 
 
-def sc(scr, x, y):
+def sc(screen, scr, x, y):
     """
     Displays the score on the screen.
 
@@ -261,7 +264,7 @@ while run:
                 scroll_speed = 4 + scores // 20
                 pass_pipe = False
 
-    sc(scores, 400, 20)
+    sc(screen, scores, 400, 20)
 
     if pygame.sprite.groupcollide(bird_group, pipe_group, False, False) or flappy.rect.top < 0:
         game_over = True
@@ -301,8 +304,8 @@ while run:
             screen.blit(score_3, (325, 455))
         else:
             screen.blit(score_4, (325, 455))
-        sc(scores, 515, 443)
-        sc(best_score, 515, 500)
+        sc(screen, scores, 515, 443)
+        sc(screen, best_score, 515, 500)
         if button.draw() == True:
             game_over = False
             sounds_playing = False

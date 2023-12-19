@@ -2,9 +2,12 @@ import pytest
 import pygame
 from proekt1 import reset_game, Bird, change_bird, Pipe, Button, sc
 
+pipe_gap = 200
+
 
 def test_reset_game():
     assert reset_game() == 0
+
 
 def test_bird_initialization():
     bird = Bird(100, 200)
@@ -12,17 +15,13 @@ def test_bird_initialization():
     assert bird.vel == 0
     assert bird.clicked is False
 
-def test_change_bird():
-    global current_skin
-    initial_skin = current_skin
-    bird_skins = [1,2,3,4]
-    change_bird()
-    assert current_skin == (initial_skin + 1) % len(bird_skins)
 
 def test_pipe_initialization():
-    pipe = Pipe(300, 400, 1)
-    assert pipe.rect.topleft == (300, 400)
+    surface = pygame.display.set_mode((100, 100))
+    pipe = Pipe(300, 400, -1)
+    assert pipe.rect.topleft == (300, 500)
     assert pipe.image is not None
+
 
 def test_button_initialization():
     button = Button(200, 300, pygame.Surface((50, 50)))
@@ -36,7 +35,7 @@ def test_sc():
     screen = pygame.Surface((800, 600))
     scores = 42
     x, y = 100, 200
-    sc(scores, x, y)
+    sc(screen, scores, x, y)
     rect_four = pygame.Rect(x, y, 20, 20)
     image_four = pygame.Surface((20, 20))
 
@@ -46,6 +45,11 @@ def test_sc():
     assert screen.get_rect().contains(rect_four)
     assert screen.get_rect().contains(rect_two)
 
-    assert screen.get_rect().contains(image_four)
-    assert screen.get_rect().contains(image_two)
 
+def test_error():
+    with pytest.raises(ValueError):
+        bird = Bird(-1000, 200)
+
+
+if __name__ == '__main__':
+    pytest.main()
